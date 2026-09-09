@@ -30,7 +30,10 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24
 
     # Confidence Thresholds
-    CONFIDENCE_THRESHOLD_AUTO_VALIDATE: float = 0.85
+    # Calibrated for real OCR confidence (not hardcoded values).
+    # A document needs ≥70% real confidence across all fields to be auto-validated.
+    # Anything below routes to human review queue.
+    CONFIDENCE_THRESHOLD_AUTO_VALIDATE: float = 0.70
 
     if SettingsConfigDict:
         model_config = SettingsConfigDict(case_sensitive=True, extra="ignore")
